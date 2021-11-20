@@ -108,7 +108,7 @@
                                               <input class="form-check-input" type="checkbox" value=""
                                                   id="{{ $allowance->id }}q">
                                               <label class="form-check-label" for="{{ $allowance->id }}q">
-                                                  {{ $allowance->name }}
+                                                  {{ $allowance->name }} :  {{ $allowance->name }} 
                                               </label>
                                           </div>
 
