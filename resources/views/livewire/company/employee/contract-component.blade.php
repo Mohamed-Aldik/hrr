@@ -28,14 +28,14 @@
                                       <div class="custom-control custom-radio custom-control-inline">
                                           <input type="radio" id="customRadioInli" name="custom"
                                               class="custom-control-input" wire:click="hideDiv"
-                                              value="@if ($joining_date){{ Carbon\Carbon::parse($joining_date)->addYear()->toDateString() }}@endif " wire:model.lazy="end_date">
+                                              value="@if ($joining_date){{ Carbon\Carbon::parse($joining_date)->addYear()->subDays(1)->toDateString() }}@endif " wire:model.lazy="end_date">
                                           <label class="custom-control-label" for="customRadioInli">1 Year</label>
                                       </div>
                                   </div>
                                   <div class="col-md-2 mb-2">
                                       <div class="custom-control custom-radio custom-control-inline">
                                           <input type="radio" id="customR" name="custom" class="custom-control-input"
-                                              wire:click="hideDiv" value="@if ($joining_date){{ Carbon\Carbon::parse($joining_date)->addYear(2)->toDateString() }}@endif "
+                                              wire:click="hideDiv" value="@if ($joining_date){{ Carbon\Carbon::parse($joining_date)->addYear(2)->subDays(1)->toDateString() }}@endif "
                                               wire:model.lazy="end_date">
                                           <label class="custom-control-label" for="customR">2 Year</label>
                                       </div>
@@ -67,7 +67,7 @@
                                   <div class="col-md-5 mb-3">
                                       <label for="customRange1" class="form-label">Probation period
                                           {{ $probation_period }} Days</label>
-                                      <input type="range" class="form-range" id="customRange1"
+                                      <input type="range" max="90" class="form-range" id="customRange1"
                                           wire:model.lazy="probation_period">
                                   </div>
                                   <div class="col-md-2 mb-3">
@@ -76,7 +76,7 @@
                                   <div class="col-md-5 mb-3">
                                       <label for="customRange1" class="form-label">Annual Balance
                                           {{ $annual_balance }} Days</label>
-                                      <input type="range" class="form-range" id="customRange1"
+                                      <input type="range" min="21" class="form-range" id="customRange1"
                                           wire:model.lazy="annual_balance">
                                   </div>
                               </div>

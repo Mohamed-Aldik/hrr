@@ -23,7 +23,7 @@ class AddEmployeeComponent extends Component
          
             'job_number' => 'required',
             'name' => 'required | string ',
-            'id_number' => 'required',
+            'id_number' => 'required | numeric|digits:10',
             'birthday' => 'required | before:15 years ago',
         ]);
     }
@@ -32,7 +32,7 @@ class AddEmployeeComponent extends Component
         $this->validate([
             'job_number' => 'required',
             'name' => 'required | string ',
-            'id_number' => 'required',
+            'id_number' => 'required | numeric|digits:10',
             'birthday' => 'required | before:15 years ago',
 
         ]);

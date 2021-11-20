@@ -23,10 +23,11 @@
                                       @error('name')<span class="text-danger">{{ $message }}</span>@enderror
 
                                   </div>
+                              
                                   <div class="col-md-3 mb-3">
                                       <label for="id_number">ID</label>
-                                      <input type="number" class="form-control" id="id_number" placeholder="Enter"
-                                          required wire:model.lazy="id_number">
+                                      <input type="number" min="10" class="form-control" id="id_number" placeholder="Enter"
+                                          required wire:model="id_number">
                                       @error('id_number')<span
                                           class="text-danger">{{ $message }}</span>@enderror
 
@@ -41,6 +42,9 @@
                                   </div>
                               </div>
                               <div class="form-row">
+                              @if(Str::startsWith($id_number, 1))
+
+                                 @else
                                   @foreach ($nationalities as $nationality)
 
                                       <div class="custom-control custom-radio custom-control-inline">
@@ -50,6 +54,7 @@
                                               for="{{ $nationality->id }}" > {{ $nationality->country }}</label>
                                       </div>
                                   @endforeach
+                                  @endif
                                   @error('nationalite')<span class="text-danger">{{ $message }}</span>@enderror
 
                               </div>
