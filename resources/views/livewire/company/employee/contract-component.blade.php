@@ -1,4 +1,4 @@
-              <form wire:submit.prevent="addEmployee" class="needs-validation" novalidate>
+              <form wire:submit.prevent="addContract" class="needs-validation" novalidate>
 
                   <div class="col-12">
                       <div class="card">
@@ -16,6 +16,7 @@
                                           id="validation3" wire:model.lazy="joining_date" required>
 
                                   </div>
+                                  @error('joining_date')<span class="text-danger">{{ $message }}</span>@enderror
 
                                   <div class="col-md-2 mb-2">
                                       <div class="custom-control custom-radio custom-control-inline">
@@ -56,6 +57,8 @@
                                           <input type="date" wire:model.lazy="end_date" class="form-control"
                                               id="validationTooltip05">
                                       @endif
+                                  @error('end_date')<span class="text-danger">{{ $message }}</span>@enderror
+
                                   </div>
                               </div>
 
@@ -69,6 +72,8 @@
                                           {{ $probation_period }} Days</label>
                                       <input type="range" max="90" class="form-range" id="customRange1"
                                           wire:model.lazy="probation_period">
+                                  @error('probation_period')<span class="text-danger">{{ $message }}</span>@enderror
+
                                   </div>
                                   <div class="col-md-2 mb-3">
 
@@ -78,6 +83,8 @@
                                           {{ $annual_balance }} Days</label>
                                       <input type="range" min="21" class="form-range" id="customRange1"
                                           wire:model.lazy="annual_balance">
+                                  @error('annual_balance')<span class="text-danger">{{ $message }}</span>@enderror
+
                                   </div>
                               </div>
 
@@ -98,6 +105,7 @@
                                       <label for="vaon3">Basic</label>
                                       <input type="number" class="form-control" id="vaon3" wire:model="basic"
                                           required>
+                                  @error('basic')<span class="text-danger">{{ $message }}</span>@enderror
 
                                   </div>
                                   <div class="col-md-3 mb-3">
@@ -117,6 +125,8 @@
                                               <input wire:model="hous" type="number">
                                           </label>
                                       </div>
+                                  @error('housing')<span class="text-danger">{{ $message }}</span>@enderror
+
                                   </div>
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Company\Employee;
 use Livewire\Component;
 use App\Models\Nationality;
 use App\Models\Employee;
+use Illuminate\Support\Str;
 
 class AddEmployeeComponent extends Component
 {
@@ -12,7 +13,7 @@ class AddEmployeeComponent extends Component
     public $name;
     public $id_number;
     public $birthday;
-    public $nationalite;
+    public $nationalite = 1;
     public $gender;
     public $email;
     public $phone;
@@ -23,7 +24,7 @@ class AddEmployeeComponent extends Component
          
             'job_number' => 'required',
             'name' => 'required | string ',
-            'id_number' => 'required | numeric|digits:10',
+            'id_number' => 'required | numeric| digits_between:10,40',
             'birthday' => 'required | before:15 years ago',
         ]);
     }
@@ -32,16 +33,18 @@ class AddEmployeeComponent extends Component
         $this->validate([
             'job_number' => 'required',
             'name' => 'required | string ',
-            'id_number' => 'required | numeric|digits:10',
+            'id_number' => 'required | numeric| digits_between:10,40',
             'birthday' => 'required | before:15 years ago',
 
         ]);
-                $employee=new Employee();
+               $employee=new Employee();
                $employee->job_number = $this->job_number;
                $employee->name = $this->name;
                $employee->id_number= $this->id_number;
                $employee->birthday= $this->birthday;
-               if($this->nationalite)
+               if(Str::startsWith($this->id_number, 1))
+               $employee->nationality_id= 1;
+               else
                $employee->nationality_id= $this->nationalite;
                $employee->gender= $this->gender;
                $employee->email= $this->email;

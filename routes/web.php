@@ -6,7 +6,7 @@ use App\Http\Livewire\Company\Employee\AddEmployeeComponent;
 use App\Http\Livewire\Company\Employee\AddEmployee2Component;
 use App\Http\Livewire\Company\Employee\AddEmployee3Component;
 use App\Http\Livewire\Company\Employee\ContractComponent;
-use App\Http\Livewire\Company\Employee\Contract2Component;
+use App\Http\Livewire\Company\Employee\ShowEmployeeComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +31,5 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/company/add-employeee/{id}',AddEmployee2Component::class)->name('add2.employee');
     Route::get('/company/add-employeee/{id}/{section}',AddEmployee3Component::class)->name('add3.employee');
     Route::get('/company/contract/{id}',ContractComponent::class)->name('add.contract');
-    Route::get('/company/contract',ContractComponent::class)->name('add2.contract');
+    Route::get('/employees',ShowEmployeeComponent::class)->name('show.employees');
 });

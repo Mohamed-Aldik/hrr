@@ -10,7 +10,7 @@ class AddEmployee3Component extends Component
 {
     public $idd;
     public $sectionn;
-    public $job_title = 0;
+    public $job_title=0;
 
     public function mount($id, $section)
     {
@@ -34,12 +34,17 @@ class AddEmployee3Component extends Component
             'job_title' => 'required',
 
         ]);
+        if($this->job_title){
         $employee = Employee::find($this->idd);
         $employee->job_title_id = $this->job_title;
 
         $employee->save();
         session()->flash("message", "Employee has been Added successfully!");
         return redirect(route('add.contract', ['id' => $employee->id]));
+    }
+    else
+    session()->flash("message", "You Must Choose Job Title!");
+
     }
 
     public function render()

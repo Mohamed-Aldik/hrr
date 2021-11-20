@@ -43,12 +43,56 @@ class ContractComponent extends Component
     {
         $this->showDiv = false;
     }
+    public function updated($fields)
+    {
+        $this->validateOnly($fields, [
+
+            'joining_date' => 'required',
+            'end_date' => 'required',
+            'probation_period' => 'required',
+            'annual_balance' => 'required',
+            'basic' => 'required',
+            'housing' => 'required',
+
+        ]);
+    }
+
+    public function addContract()
+    {
+        $this->validate([
+            'joining_date' => 'required',
+            'end_date' => 'required',
+            'probation_period' => 'required',
+            'annual_balance' => 'required',
+            'basic' => 'required',
+            'housing' => 'required',
+        ]);
+
+        $employee=new Contract();
+        $employee->employee_id  = $this->idd ;
+        $employee->joining_date  = $this->joining_date ;
+        $employee->probation_period  = $this->probation_period  ;
+        $employee->annual_balance  = $this->annual_balance  ;
+        $employee->basic_salary  = $this->basic  ;
+        $employee->end_date  = $this->end_date  ;
+        $employee->save();
+
+        $allw=Allowance::where('name','housing')->first();
+        if(!$allw){
+            $allw=new Allowance();
+            $allw->name='housing';
+            $allw->save();
+            }
+            $allw->employees()->syncWithPivotValues($this->idd, ['allowance_id' => $allw->id,'value' => $this->housing]);
+            session()->flash("message", "Employee has been Added successfully!");
+            return redirect(route('show.employees'));
+
+    }
 
     public function add()
     {
 
         $allw=Allowance::where('name',$this->name_allow)->first();
-        $housi=Allowance::where('name',$this->name_allow)->first();
         if(!$allw){
         $allw=new Allowance();
         $allw->name=$this->name_allow;
