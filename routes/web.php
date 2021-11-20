@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\Company\Employee\AddEmployeeComponent;
+use App\Http\Livewire\Company\Employee\AddEmployee2Component;
+use App\Http\Livewire\Company\Employee\AddEmployee3Component;
+use App\Http\Livewire\Company\Employee\ContractComponent;
+use App\Http\Livewire\Company\Employee\Contract2Component;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +27,9 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/home',HomeComponent::class)->name('home');
+    Route::get('/company/add-employee',AddEmployeeComponent::class)->name('add.employee');
+    Route::get('/company/add-employeee/{id}',AddEmployee2Component::class)->name('add2.employee');
+    Route::get('/company/add-employeee/{id}/{section}',AddEmployee3Component::class)->name('add3.employee');
+    Route::get('/company/contract/{id}',ContractComponent::class)->name('add.contract');
+    Route::get('/company/contract',ContractComponent::class)->name('add2.contract');
 });

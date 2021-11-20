@@ -44,4 +44,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+    public function managements()
+    {
+        return $this->belongsToMany(Management::class, 'company_management', 'user_id', 'management_id','id','id');
+
+    }
+    
 }
