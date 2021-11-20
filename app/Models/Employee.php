@@ -29,7 +29,7 @@ class Employee extends Model
 
     public function allowances()
     {
-        return $this->belongsToMany(Allowance::class, 'employee_allowances', 'employee_id', 'allowance_id','id','id');
+        return $this->belongsToMany(Allowance::class, 'employee_allowances', 'employee_id', 'allowance_id','id','id')->withPivot('value');
 
     }
 

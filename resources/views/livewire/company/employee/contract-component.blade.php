@@ -96,56 +96,76 @@
 
                                   <div class="col-md-2 mb-3">
                                       <label for="vaon3">Basic</label>
-                                      <input type="number" class="form-control" id="vaon3" wire:model.lazy="basic"
+                                      <input type="number" class="form-control" id="vaon3" wire:model="basic"
                                           required>
 
                                   </div>
                                   <div class="col-md-3 mb-3">
-                                      <label for="vaon3">Allowances</label>
-
-                                      @foreach ($allowances as $allowance)
-                                          <div class="form-check">
-                                              <input class="form-check-input" type="checkbox" value=""
-                                                  id="{{ $allowance->id }}q">
-                                              <label class="form-check-label" for="{{ $allowance->id }}q">
-                                                  {{ $allowance->name }} :  {{ $allowance->name }} 
-                                              </label>
-                                          </div>
-
-                                      @endforeach
-
+                                      <label for="vaon3">Housing</label>
+                                      {{ $housing }}
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="exampleRadios"
+                                              id="exampadios1" value="{{ 0.25 * $basic }}" wire:model="housing">
+                                          <label class="form-check-label" for="exampadios1">
+                                              25%
+                                          </label>
+                                      </div>
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="exampleRadios"
+                                              id="mpleRadios2" value="{{ $hous }}" wire:model="housing">
+                                          <label class="form-check-label">
+                                              <input wire:model="hous" type="number">
+                                          </label>
+                                      </div>
                                   </div>
 
 
                                   <div class="col-md-2 mb-3">
-                                      <label for="dation3">Add Allowances</label>
+                                      <label for="dation3">Allowances</label>
+                                      <br>
                                       <button type="button" class="btn btn-primary" data-toggle="modal"
                                           data-target="#exampleModal">
                                           Add
                                       </button>
+                                      <br>
+                                      <?php $total = 0; ?>
+
+                                      @foreach ($employee->allowances as $allowance)
+                                          <div class="form-check">
+
+                                              <label class="form-check-label">
+                                                  {{ $allowance->name }} : {{ $allowance->pivot->value }}
+                                              </label>
+                                          </div>
+                                          <?php $total += $allowance->pivot->value; ?>
+
+                                      @endforeach
 
                                   </div>
                                   <div class="col-md-4 mb-3">
 
                                       <div class="form-row">
-                                          1
+                                          <label class="form-check-label">
+                                              Total Package: {{ $tot= $total + $basic + $housing  }}
+
+                                          </label>
 
                                       </div>
 
                                       <div class="form-row">
-                                          2
-
-                                      </div>
-
-
-                                      <div class="form-row">
-                                          3
+                                          GOSI Salary:  {{ $GOSI=$housing + $basic }}
 
                                       </div>
 
 
                                       <div class="form-row">
-                                          4
+                                          Gosi Dedc: {{ $Dedc= ( $GOSI * 0.1 ) >= 4500 ? 4500 : $GOSI * 0.1  }}
+
+                                      </div>
+
+
+                                      <div class="form-row">
+                                          Net Salary:  {{ $tot - $Dedc}}
 
                                       </div>
 
@@ -197,7 +217,7 @@
                                               <button type="button" class="btn btn-secondary"
                                                   data-dismiss="modal">Close</button>
                                               <button type="button" class="btn btn-primary" wire:click="add">Add
-                                                  </button>
+                                              </button>
                                           </div>
                                       </div>
                                   </div>

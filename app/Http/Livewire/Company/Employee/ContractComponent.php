@@ -5,16 +5,19 @@ namespace App\Http\Livewire\Company\Employee;
 use Livewire\Component;
 use App\Models\Contract;
 use App\Models\Allowance;
+use App\Models\Employee;
 
 class ContractComponent extends Component
 {
     public $idd;
     public $joining_date;
     public $end_date;
+    public $housing=0;
+    public $hous=0;
     public $probation_period;
     public $annual_balance;
     public $showDiv = false;
-    public $basic;
+    public $basic=0;
     public $name_allow;
     public $val_allow;
 
@@ -28,8 +31,8 @@ class ContractComponent extends Component
 
     public function render()
     {
-        $allowances = Allowance::all();
-        return view('livewire.company.employee.contract-component', ['allowances'=>$allowances]);
+        $employee = Employee::find($this->idd);
+        return view('livewire.company.employee.contract-component', ['employee'=>$employee]);
     }
     public function openDiv()
     {
@@ -43,10 +46,15 @@ class ContractComponent extends Component
 
     public function add()
     {
+
+        $allw=Allowance::where('name',$this->name_allow)->first();
+        $housi=Allowance::where('name',$this->name_allow)->first();
+        if(!$allw){
         $allw=new Allowance();
         $allw->name=$this->name_allow;
         $allw->save();
-        $allw->employees()->attach($this->idd, ['allowance_id' => $allw->id,'value' => $this->val_allow]);
+        }
+        $allw->employees()->syncWithPivotValues($this->idd, ['allowance_id' => $allw->id,'value' => $this->val_allow]);
 
 
     }
