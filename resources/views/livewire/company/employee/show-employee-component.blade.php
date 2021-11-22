@@ -22,7 +22,6 @@
                                   </thead>
                                   <tbody>
                                       @foreach ($employees as $employee)
-
                                           <tr>
                                               <td>{{ $employee->job_number }}</td>
                                               <td>{{ $employee->name }}</td>

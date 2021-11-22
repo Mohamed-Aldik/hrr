@@ -18,13 +18,13 @@ class CreateContractsTable extends Migration
             $table->foreignId('employee_id')->nullable()->constrained('employees');
             $table->dateTime('joining_date')->nullable();
             $table->dateTime('end_date')->nullable(); 
-            $table->integer('probation_period')->nullable(); 
-            $table->integer('annual_balance')->nullable();
-            $table->bigInteger('basic_salary')->nullable();
-            $table->bigInteger('total_salary')->nullable();
-            $table->bigInteger('gosi_salary')->nullable();
-            $table->bigInteger('gosi_dedc')->nullable();
-            $table->bigInteger('net_salary')->nullable();
+            $table->double('probation_period')->nullable(); 
+            $table->double('annual_balance')->nullable();
+            $table->double('basic_salary')->nullable();
+            $table->double('total_salary')->nullable();
+            $table->double('gosi_salary')->nullable();
+            $table->double('gosi_dedc')->nullable();
+            $table->double('net_salary')->nullable();
             $table->timestamps();
         });
     }

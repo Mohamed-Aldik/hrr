@@ -17,7 +17,7 @@ class CreateEmployeeAllowancesTable extends Migration
             $table->id();
             $table->foreignId('employee_id')->nullable()->constrained('employees');
             $table->foreignId('allowance_id')->nullable()->constrained('allowances');
-            $table->bigInteger('value')->nullable(); 
+            $table->double('value')->nullable(); 
             $table->timestamps();
         });
     }

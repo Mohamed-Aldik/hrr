@@ -138,17 +138,19 @@
                                           Add
                                       </button>
                                       <br>
-                                      <?php $total = 0; ?>
+                                      <?php $tot = 0; ?>
 
                                       @foreach ($employee->allowances as $allowance)
+                                       @if($allowance->pivot->allowance_id != 1)
                                           <div class="form-check">
 
                                               <label class="form-check-label">
                                                   {{ $allowance->name }} : {{ $allowance->pivot->value }}
                                               </label>
                                           </div>
-                                          <?php $total += $allowance->pivot->value; ?>
-
+                                         
+                                          <?php $tot += $allowance->pivot->value; ?>
+                                            @endif
                                       @endforeach
 
                                   </div>
@@ -156,26 +158,25 @@
 
                                       <div class="form-row">
                                           <label class="form-check-label">
-                                              Total Package: {{ $total_salary= $total + $basic + $housing  }}
-                                                <input type="hidden"  wire:model="total_salary">
+                                              Total Package: {{ $tota= $tot + $basic + $housing  }}
                                           </label>
 
                                       </div>
 
                                       <div class="form-row">
-                                          GOSI Salary:  {{ $gosi_salary=$housing + $basic }}
+                                          GOSI Salary:  {{ $gosi_salar=$housing + $basic }}
 
                                       </div>
 
 
                                       <div class="form-row">
-                                          Gosi Dedc: @if($employee->nationality->id == 1 ) {{ $gosi_dedc= ( $gosi_salary * 0.1 ) >= 4500 ? 4500 : $gosi_salary * 0.1  }} @else {{ $gosi_dedc = 0 }} @endif
+                                          Gosi Dedc: @if($employee->nationality->id == 1 ) {{ $gosi_ded= ( $gosi_salar * 0.1 ) >= 4500 ? 4500 : $gosi_salar * 0.1  }} @else {{ $gosi_ded = 0 }} @endif
 
                                       </div>
 
 
                                       <div class="form-row">
-                                          Net Salary:  {{$net_salary = $total_salary - $gosi_dedc}}
+                                          Net Salary:  {{$net_salary = $tota - $gosi_ded}}
 
                                       </div>
 
