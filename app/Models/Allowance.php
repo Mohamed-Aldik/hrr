@@ -9,10 +9,13 @@ class Allowance extends Model
 {
     use HasFactory;
 
-    
+    protected $fillable = [];
+    protected $table = 'allowances';
+
+
     public function employees()
     {
-        return $this->belongsToMany(Employee::class, 'employee_allowances', 'allowance_id', 'employee_id','id','id');
+        return $this->belongsToMany(Employee::class, 'employee_allowances', 'allowance_id', 'employee_id','id','id')->withPivot('value');
 
     }
 

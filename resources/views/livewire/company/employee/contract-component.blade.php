@@ -156,26 +156,26 @@
 
                                       <div class="form-row">
                                           <label class="form-check-label">
-                                              Total Package: {{ $tot= $total + $basic + $housing  }}
-
+                                              Total Package: {{ $total_salary= $total + $basic + $housing  }}
+                                                <input type="hidden"  wire:model="total_salary">
                                           </label>
 
                                       </div>
 
                                       <div class="form-row">
-                                          GOSI Salary:  {{ $GOSI=$housing + $basic }}
+                                          GOSI Salary:  {{ $gosi_salary=$housing + $basic }}
 
                                       </div>
 
 
                                       <div class="form-row">
-                                          Gosi Dedc: {{ $Dedc= ( $GOSI * 0.1 ) >= 4500 ? 4500 : $GOSI * 0.1  }}
+                                          Gosi Dedc: @if($employee->nationality->id == 1 ) {{ $gosi_dedc= ( $gosi_salary * 0.1 ) >= 4500 ? 4500 : $gosi_salary * 0.1  }} @else {{ $gosi_dedc = 0 }} @endif
 
                                       </div>
 
 
                                       <div class="form-row">
-                                          Net Salary:  {{ $tot - $Dedc}}
+                                          Net Salary:  {{$net_salary = $total_salary - $gosi_dedc}}
 
                                       </div>
 

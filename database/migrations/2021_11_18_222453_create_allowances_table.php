@@ -16,6 +16,8 @@ class CreateAllowancesTable extends Migration
         Schema::create('allowances', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->bigInteger('value')->nullable();
+            $table->foreignId('employee_id')->nullable()->constrained('employees');
             $table->timestamps();
         });
     }

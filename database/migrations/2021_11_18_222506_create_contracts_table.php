@@ -21,6 +21,10 @@ class CreateContractsTable extends Migration
             $table->integer('probation_period')->nullable(); 
             $table->integer('annual_balance')->nullable();
             $table->bigInteger('basic_salary')->nullable();
+            $table->bigInteger('total_salary')->nullable();
+            $table->bigInteger('gosi_salary')->nullable();
+            $table->bigInteger('gosi_dedc')->nullable();
+            $table->bigInteger('net_salary')->nullable();
             $table->timestamps();
         });
     }

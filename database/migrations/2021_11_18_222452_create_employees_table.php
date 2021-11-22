@@ -24,6 +24,8 @@ class CreateEmployeesTable extends Migration
             $table->foreignId('nationality_id')->nullable()->constrained('nationalities');
             $table->foreignId('job_title_id')->nullable()->constrained('job_titles');
             $table->dateTime('birthday')->nullable();
+            $table->string("utype")->default("EMP")->comment("EMP for Employee and SEC for Section and MAN for Manager");
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

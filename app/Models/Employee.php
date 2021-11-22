@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Contract;
 
 class Employee extends Model
 {
     use HasFactory;
 
-    
+    protected $fillable = [];
+    protected $table = 'employees';
 
     public function jobTitle()
     {
@@ -23,7 +25,7 @@ class Employee extends Model
 
     public function contracts()
     {
-        return $this->hasMany(Contract::class, 'employee_id', 'id');
+        return $this->hasOne(Contract::class, 'employee_id', 'id');
 
     }
 

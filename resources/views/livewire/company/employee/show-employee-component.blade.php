@@ -29,7 +29,7 @@
                                               <td>{{ $employee->jobTitle->department->management->name }}</td>
                                               <td>{{ $employee->jobTitle->department->name }}</td>
                                               <td>{{ $employee->jobTitle->name }}</td>
-                                              <td>{{ $employee->created_at }}</td>
+                                              <td>{{ Carbon\Carbon::parse( $employee->contracts->joining_date)->toDateString()}}</td>
 
                                           </tr>
                                       @endforeach

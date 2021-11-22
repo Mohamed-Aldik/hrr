@@ -7,6 +7,7 @@ use App\Http\Livewire\Company\Employee\AddEmployee2Component;
 use App\Http\Livewire\Company\Employee\AddEmployee3Component;
 use App\Http\Livewire\Company\Employee\ContractComponent;
 use App\Http\Livewire\Company\Employee\ShowEmployeeComponent;
+use App\Http\Livewire\Company\Employee\ShowPayrollsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,5 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/company/add-employeee/{id}/{section}',AddEmployee3Component::class)->name('add3.employee');
     Route::get('/company/contract/{id}',ContractComponent::class)->name('add.contract');
     Route::get('/employees',ShowEmployeeComponent::class)->name('show.employees');
+    Route::get('/payrolls',ShowPayrollsComponent::class)->name('show.payrolls');
 });

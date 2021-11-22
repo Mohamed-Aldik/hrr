@@ -12,12 +12,16 @@ class ContractComponent extends Component
     public $idd;
     public $joining_date;
     public $end_date;
-    public $housing=0;
-    public $hous=0;
+    public $housing = 0;
+    public $hous = 0;
     public $probation_period;
     public $annual_balance;
     public $showDiv = false;
-    public $basic=0;
+    public $basic = 0;
+    public $total_salary = 0;
+    public $gosi_salary = 0;
+    public $gosi_dedc = 0;
+    public $net_salary = 0;
     public $name_allow;
     public $val_allow;
 
@@ -32,7 +36,7 @@ class ContractComponent extends Component
     public function render()
     {
         $employee = Employee::find($this->idd);
-        return view('livewire.company.employee.contract-component', ['employee'=>$employee]);
+        return view('livewire.company.employee.contract-component', ['employee' => $employee]);
     }
     public function openDiv()
     {
@@ -67,39 +71,43 @@ class ContractComponent extends Component
             'basic' => 'required',
             'housing' => 'required',
         ]);
-
-        $employee=new Contract();
-        $employee->employee_id  = $this->idd ;
-        $employee->joining_date  = $this->joining_date ;
-        $employee->probation_period  = $this->probation_period  ;
-        $employee->annual_balance  = $this->annual_balance  ;
-        $employee->basic_salary  = $this->basic  ;
-        $employee->end_date  = $this->end_date  ;
+       
+        $employee = new Contract();
+        $employee->employee_id  = $this->idd;
+        $employee->joining_date  = $this->joining_date;
+        $employee->probation_period  = $this->probation_period;
+        $employee->annual_balance  = $this->annual_balance;
+        $employee->basic_salary  = $this->basic;
+        $employee->total_salary  = $this->total_salary;
+        $employee->gosi_salary  = $this->gosi_salary;
+        $employee->gosi_dedc  = $this->gosi_dedc;
+        $employee->net_salary  = $this->net_salary;
+        if ($this->end_date === "Unlimited")
+            $employee->end_date  = null;
+        else
+            $employee->end_date  = $this->end_date;
         $employee->save();
 
-        $allw=Allowance::where('name','housing')->first();
-        if(!$allw){
-            $allw=new Allowance();
-            $allw->name='housing';
+        $allw = Allowance::where('name', 'housing')->first();
+        if (!$allw) {
+            $allw = new Allowance();
+            $allw->name = 'housing';
             $allw->save();
-            }
-            $allw->employees()->syncWithPivotValues($this->idd, ['allowance_id' => $allw->id,'value' => $this->housing]);
-            session()->flash("message", "Employee has been Added successfully!");
-            return redirect(route('show.employees'));
-
+        }
+        $allw->employees()->attach ($this->idd, ['allowance_id' => $allw->id, 'value' => $this->housing]);
+        session()->flash("message", "Employee has been Added successfully!");
+        return redirect(route('show.employees'));
     }
 
     public function add()
     {
 
-        $allw=Allowance::where('name',$this->name_allow)->first();
-        if(!$allw){
-        $allw=new Allowance();
-        $allw->name=$this->name_allow;
-        $allw->save();
+        $allw = Allowance::where('name', $this->name_allow)->first();
+        if (!$allw) {
+            $allw = new Allowance();
+            $allw->name = $this->name_allow;
+            $allw->save();
         }
-        $allw->employees()->syncWithPivotValues($this->idd, ['allowance_id' => $allw->id,'value' => $this->val_allow]);
-
-
+        $allw->employees()->attach ($this->idd, ['allowance_id' => $allw->id, 'value' => $this->val_allow]);
     }
 }

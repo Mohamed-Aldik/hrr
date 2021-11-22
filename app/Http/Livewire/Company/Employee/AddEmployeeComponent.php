@@ -49,6 +49,7 @@ class AddEmployeeComponent extends Component
                $employee->gender= $this->gender;
                $employee->email= $this->email;
                $employee->phone= $this->phone;               
+               $employee->user_id= auth()->user()->id;               
                $employee->save();
                session()->flash("message", "Employee has been Added successfully!");
                return redirect(route('add2.employee',['id'=>$employee->id]));
