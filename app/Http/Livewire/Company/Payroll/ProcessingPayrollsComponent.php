@@ -19,7 +19,7 @@ class ProcessingPayrollsComponent extends Component
     }
     public function render()
     {
-        $contracts=Contract::whereYear('joining_date','20'.$this->yer)->whereMonth('joining_date',$this->mnth)->get();
+        $contracts=Contract::where('joining_date','<=','20'.$this->yer.'-'.$this->mnth.'-31')->get();
         return view('livewire.company.payroll.processing-payrolls-component',['contracts'=> $contracts]);
     }
 }

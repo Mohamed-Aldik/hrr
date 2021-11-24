@@ -17,9 +17,10 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->foreignId('employee_id')->nullable()->constrained('employees');
             $table->enum('transactions', ['over_time', 'deduction'])->nullable();
+            $table->enum('deduction', ['absence', 'other'])->nullable();
             $table->dateTime('date')->nullable();
-            $table->float('hours')->nullable();
-            $table->float('price')->nullable();
+            $table->double('hours', 15, 2)->nullable();
+            $table->double('price', 15, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -22,12 +22,15 @@
             </thead>
             <tbody>
                 @foreach ( $employees as $employee)
+                
                 <tr>
                     
                     <td>{{ $employee->job_number }}</td>
                         <td>{{ $employee->name }}</td>
-                        <td>{{ $employee->contracts->basic_salary }}</td>
+                                              @if($employee->contracts)
 
+                        <td>{{ $employee->contracts->basic_salary }}</td>
+@endif
                     <td>
                         <ul>
                             @forelse ($employee->allowances as $allowance)
@@ -38,13 +41,18 @@
                         </ul>
                     </td>
                     <td> {{ $employee->transactions->where('transactions','over_time')->sum('hours') }} </td>
+                                              @if($employee->contracts)
+                       
                         <td> {{ $employee->contracts->gosi_dedc }} </td>
+                        @endif
                         <td> Absence </td>
                         <td> Violations </td>
                         <td> Advanced</td>
+                                              @if($employee->contracts)
+
                         <td> {{ $employee->contracts->net_salary }}</td>
 
-
+@endif
 
                 </tr>
                 @endforeach
