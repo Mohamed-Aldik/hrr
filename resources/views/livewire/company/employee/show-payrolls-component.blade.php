@@ -45,9 +45,9 @@
                        
                         <td> {{ $employee->contracts->gosi_dedc }} </td>
                         @endif
-                        <td> Absence </td>
-                        <td> Violations </td>
-                        <td> Advanced</td>
+                        <td> 0 </td>
+                        <td> 0 </td>
+                        <td> 0</td>
                                               @if($employee->contracts)
 
                         <td> {{ $employee->contracts->net_salary }}</td>
