@@ -24,7 +24,23 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('show.payrolls') }}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">Payrolls</span>
+                                <span class="hide-menu">Payrolls Table</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('view.payrolls') }}"
+                                aria-expanded="false">
+                                <i class="mdi mdi-av-timer"></i>
+                                <span class="hide-menu">Payrolls Processing</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('show.transaction') }}"
+                                aria-expanded="false">
+                                <i class="mdi mdi-av-timer"></i>
+                                <span class="hide-menu">Transaction</span>
                             </a>
                         </li>
 

@@ -35,6 +35,12 @@ class Employee extends Model
 
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'employee_id', 'id');
+
+    }
+
 
 
 }

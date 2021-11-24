@@ -1,4 +1,3 @@
-<form wire:submit.prevent="addEmployee" class="needs-validation" novalidate>
     <div class="table-responsive">
         @if (Session::has('message'))
             <div class="alert alert-success" role="alert">
@@ -38,7 +37,7 @@
                             @endforelse
                         </ul>
                     </td>
-                    <td> OverTime </td>
+                    <td> {{ $employee->transactions->where('transactions','over_time')->sum('hours') }} </td>
                         <td> {{ $employee->contracts->gosi_dedc }} </td>
                         <td> Absence </td>
                         <td> Violations </td>
@@ -56,4 +55,3 @@
 
     </div>
 
-</form>

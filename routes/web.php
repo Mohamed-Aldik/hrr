@@ -8,6 +8,9 @@ use App\Http\Livewire\Company\Employee\AddEmployee3Component;
 use App\Http\Livewire\Company\Employee\ContractComponent;
 use App\Http\Livewire\Company\Employee\ShowEmployeeComponent;
 use App\Http\Livewire\Company\Employee\ShowPayrollsComponent;
+use  App\Http\Livewire\Company\Transaction\TransactionComponent;
+use  App\Http\Livewire\Company\Payroll\ProcessingPayrollsComponent;
+use  App\Http\Livewire\Company\Payroll\ViewProcessingPayrollsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +37,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/company/contract/{id}',ContractComponent::class)->name('add.contract');
     Route::get('/employees',ShowEmployeeComponent::class)->name('show.employees');
     Route::get('/payrolls',ShowPayrollsComponent::class)->name('show.payrolls');
+    Route::get('/payrolls/view',ViewProcessingPayrollsComponent::class)->name('view.payrolls');
+    Route::get('/payrolls/{year}/{month}',ProcessingPayrollsComponent::class)->name('processing.payrolls');
+    Route::get('/transaction',TransactionComponent::class)->name('show.transaction');
 });

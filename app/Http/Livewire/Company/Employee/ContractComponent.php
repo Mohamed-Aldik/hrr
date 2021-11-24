@@ -21,14 +21,11 @@ class ContractComponent extends Component
     public $name_allow;
     public $val_allow;
 
-
     public function mount($id)
     {
         $this->idd = $id;
         $this->joining_date = now();
     }
-
-
     public function render()
     {
         $employee = Employee::find($this->idd);
@@ -57,7 +54,6 @@ class ContractComponent extends Component
 
         ]);
     }
-
     public function addContract()
     {
         $this->validate([
@@ -70,12 +66,9 @@ class ContractComponent extends Component
         ]);
         $total = 0;
         $allw = Allowance::find(1);
-
         $allw->employees()->syncWithPivotValues($this->idd, ['allowance_id' => $allw->id, 'value' => $this->housing]);
-
         $employ = Employee::find($this->idd);
         foreach ($employ->allowances as $allowance) {
-           
             $total += $allowance->pivot->value;
         }
         $employee = Contract::where('employee_id', $this->idd)->first();
@@ -85,9 +78,8 @@ class ContractComponent extends Component
         $employee->joining_date  = $this->joining_date;
         $employee->probation_period  = $this->probation_period;
         $employee->annual_balance  = $this->annual_balance;
-
         $employee->basic_salary  = $this->basic;
-        $employee->total_salary  = $total + $this->basic ;
+        $employee->total_salary  = $total + $this->basic;
         $employee->gosi_salary  = $this->housing + $this->basic;
         if ($employ->nationality->id == 1) {
             $gosi = (($this->housing + $this->basic) * 0.1) >= 4500 ? 4500 : ($this->housing + $this->basic) * 0.1;
@@ -101,24 +93,12 @@ class ContractComponent extends Component
             $employee->end_date  = null;
         else
             $employee->end_date  = $this->end_date;
-
-
-
-
-
-
-
-
         $employee->save();
-
-
         session()->flash("message", "Employee has been Added successfully!");
         return redirect(route('show.employees'));
     }
-
     public function add()
     {
-
         $allw = Allowance::where('name', $this->name_allow)->first();
         if (!$allw) {
             $allw = new Allowance();

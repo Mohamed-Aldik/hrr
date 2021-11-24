@@ -1,4 +1,3 @@
-              <form wire:submit.prevent="addEmployee" class="needs-validation" novalidate>
 
                   <div class="col-12">
                       <div class="card">
@@ -40,4 +39,3 @@
                           </div>
                       </div>
                   </div>
-              </form>
