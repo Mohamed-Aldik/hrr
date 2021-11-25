@@ -14,6 +14,7 @@ class TransactionComponent extends Component
     public $trans = 'over_time';
     public $date;
     public $change;
+    public $deduction ='absence';
 
     public function add()
     {
@@ -32,6 +33,8 @@ class TransactionComponent extends Component
             } else {
                 $transaction->hours = 0;
                 $transaction->price = $this->hours;
+                $transaction->deduction = $this->deduction;
+
             }
             if($this->date)
             $transaction->date = $this->date;

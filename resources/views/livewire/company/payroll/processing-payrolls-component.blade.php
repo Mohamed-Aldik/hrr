@@ -37,10 +37,10 @@
                                 @endforelse
                             </ul>
                         </td>
-                        <td> {{ $contract->employee->transactions->where('transactions', 'over_time')->sum('hours') }}</td>
+                        <td> {{ $contract->employee->transactions->where('transactions', 'over_time')->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->sum('hours') }}</td>
                         <td> {{ $contract->gosi_dedc }} </td>
-                        <td> 0 </td>
-                        <td> 0 </td>
+                        <td> {{ $contract->employee->transactions->where('deduction', 'absence')->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->sum('price')  }}</td>
+                        <td> {{ $contract->employee->transactions->where('deduction', 'other')->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->sum('price')  }}</td>
                         <td> 0 </td>
                         <td>
                             {{($contract->total_salary / 30) * (Carbon\Carbon::parse($contract->joining_date)->diffInDays(now()) + 1 ) + $contract->employee->transactions->where('transactions', 'over_time')->sum('price') - $contract->employee->transactions->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->where('transactions', 'deduction')->sum('price') - $contract->gosi_dedc}}

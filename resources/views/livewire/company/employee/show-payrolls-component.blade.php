@@ -15,7 +15,7 @@
                     <th scope="col">OverTime</th>
                     <th scope="col">GOSI</th>
                     <th scope="col">Absence</th>
-                    <th scope="col">Violations</th>
+                    <th scope="col">Other</th>
                     <th scope="col">Advanced</th>
                     <th scope="col">Net Salary</th>
                 </tr>
@@ -45,8 +45,8 @@
                        
                         <td> {{ $employee->contracts->gosi_dedc }} </td>
                         @endif
-                        <td> 0 </td>
-                        <td> 0 </td>
+                        <td>{{ $employee->transactions->where('deduction','absence')->sum('price') }}</td>
+                        <td>{{ $employee->transactions->where('deduction','other')->sum('price') }}</td>
                         <td> 0</td>
                                               @if($employee->contracts)
 

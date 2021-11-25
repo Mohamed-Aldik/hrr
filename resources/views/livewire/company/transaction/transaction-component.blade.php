@@ -34,13 +34,14 @@
                         <td> {{ $transe->transactions }} </td>
                         <td> {{ $transe->employee->job_number }} </td>
                         <td> {{ $transe->employee->name }} </td>
-                        <td> {{ $transe->hours }} </td>
+                        <td> @if ($transe->transactions == 'over_time') {{ $transe->hours }} @else {{ $transe->deduction }}   @endif</td>
                         <td> {{ Carbon\Carbon::parse($transe->date)->format('Y/m/d') }} </td>
                         <td> {{ $transe->price }} </td>
                         <td>
-                            <a href="#" onclick="confirm('Are you sure, You want to delete this transactions ?') || event.stopImmediatePropagation()"
+                            <a href="#"
+                                onclick="confirm('Are you sure, You want to delete this transactions ?') || event.stopImmediatePropagation()"
                                 wire:click.prevent="deleteTransactions({{ $transe->id }})" style="margin-left:10px">
-                                 <i class="m-r-10 mdi mdi-window-close"></i>
+                                <i class="m-r-10 mdi mdi-window-close"></i>
                             </a>
 
                         </td>
@@ -85,11 +86,11 @@
 
                         <div class="form-row">
                             <div class="col">
-                            <label for="validationDefault01">Job Number</label>
+                                <label for="validationDefault01">Job Number</label>
                                 <input type="number" class="form-control" placeholder="J.N" wire:model.lazy="number">
                             </div>
                             <div class="col">
-                            <label for="validationDefault01">Name</label>
+                                <label for="validationDefault01">Name</label>
                                 <input type="text" class="form-control" placeholder="Name" wire:model.lazy="name">
                             </div>
                         </div>
@@ -98,20 +99,32 @@
 
                         <div class="form-row">
                             <div class="col">
-                            <label for="validationDefault01">Date</label>
+                                <label for="validationDefault01">Date</label>
                                 <input type="date" class="form-control" wire:model.lazy="date">
                             </div>
                             <br>
 
                             <div class="col">
-                            <label for="validationDefault01">{{ $change }}</label>
-                                <input type="number" class="form-control" placeholder="Hours" wire:model.lazy="hours">
+                                <label for="validationDefault01">{{ $change }}</label>
+                                <input type="number" class="form-control" placeholder="{{ $change }}"
+                                    wire:model.lazy="hours">
 
                             </div>
                         </div>
 
-
-
+                        @if ($change == 'Amount')
+                            <br>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline5" value='absence' name="customRadioInline"
+                                    class="custom-control-input" wire:model.lazy="deduction">
+                                <label class="custom-control-label" for="customRadioInline5"> Absence </label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline4" value='other' name="customRadioInline"
+                                    class="custom-control-input" wire:model.lazy="deduction">
+                                <label class="custom-control-label" for="customRadioInline4">Other</label>
+                            </div>
+                        @endif
 
 
 
