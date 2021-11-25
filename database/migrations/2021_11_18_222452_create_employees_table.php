@@ -18,9 +18,9 @@ class CreateEmployeesTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('gender')->nullable();
-            $table->bigInteger('job_number')->nullable();
-            $table->bigInteger('phone')->nullable();
-            $table->bigInteger('id_number')->nullable();
+            $table->bigInteger('job_number')->nullable()->unique();
+            $table->bigInteger('phone')->nullable()->unique();
+            $table->bigInteger('id_number')->nullable()->unique();
             $table->foreignId('nationality_id')->nullable()->constrained('nationalities');
             $table->foreignId('job_title_id')->nullable()->constrained('job_titles');
             $table->dateTime('birthday')->nullable();
