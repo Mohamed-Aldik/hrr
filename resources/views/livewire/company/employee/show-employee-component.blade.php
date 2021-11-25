@@ -24,12 +24,10 @@
                                           <tr>
                                               <td>{{ $employee->job_number }}</td>
                                               <td>{{ $employee->name }}</td>
-                                              <td>{{ $employee->jobTitle->department->management->name }}</td>
-                                              <td>{{ $employee->jobTitle->department->name }}</td>
-                                              <td>{{ $employee->jobTitle->name }}</td>
-                                              @if($employee->contracts)
-                                              <td>{{ Carbon\Carbon::parse( $employee->contracts->joining_date)->toDateString()}}</td>
-                                               @endif
+                                              <td>@if($employee->jobTitle) {{ $employee->jobTitle->department->management->name }}@endif</td>
+                                              <td>@if($employee->jobTitle){{ $employee->jobTitle->department->name }}@endif</td>
+                                              <td>@if($employee->jobTitle){{ $employee->jobTitle->name }}@endif</td>
+                                              <td>@if($employee->contracts){{ Carbon\Carbon::parse( $employee->contracts->joining_date)->toDateString()}}@endif</td>
                                           </tr>
                                       @endforeach
 

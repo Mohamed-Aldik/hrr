@@ -73,7 +73,7 @@ class ContractComponent extends Component
         }
         $employee = Contract::where('employee_id', $this->idd)->first();
         if ($employee == null)
-            $employee = new Contract();
+        $employee = new Contract();
         $employee->employee_id  = $this->idd;
         $employee->joining_date  = $this->joining_date;
         $employee->probation_period  = $this->probation_period;
