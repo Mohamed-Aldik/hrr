@@ -11,6 +11,7 @@ use App\Http\Livewire\Company\Employee\ShowPayrollsComponent;
 use  App\Http\Livewire\Company\Transaction\TransactionComponent;
 use  App\Http\Livewire\Company\Payroll\ProcessingPayrollsComponent;
 use  App\Http\Livewire\Company\Payroll\ViewProcessingPayrollsComponent;
+use  App\Http\Livewire\Company\Payroll\VersionPayrollsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/payrolls',ShowPayrollsComponent::class)->name('show.payrolls');
     Route::get('/payrolls/view',ViewProcessingPayrollsComponent::class)->name('view.payrolls');
     Route::get('/payrolls/{year}/{month}',ProcessingPayrollsComponent::class)->name('processing.payrolls');
+    Route::get('/payrolls/version',VersionPayrollsComponent::class)->name('version.payrolls');
     Route::get('/transaction',TransactionComponent::class)->name('show.transaction');
 });

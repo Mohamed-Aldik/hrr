@@ -1,4 +1,7 @@
     <div class="table-responsive">
+    <button type="button" class="btn btn-primary"><a class="text-white" href="{{ route('version.payrolls') }}">Version</a></button>
+<br>
+<br>
         @if (Session::has('message'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('message') }}
@@ -21,6 +24,9 @@
                 </tr>
             </thead>
             <tbody>
+            @if ('20'.$yer.'-'.$mnth.'-'. Carbon\Carbon::now()->format('d') > now()   )
+                
+            @else
                 @foreach ($contracts as $contract)
                     <tr>
 
@@ -43,11 +49,26 @@
                         <td> {{ $contract->employee->transactions->where('deduction', 'other')->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->sum('price')  }}</td>
                         <td> 0 </td>
                         <td>
-                            {{($contract->total_salary / 30) * (Carbon\Carbon::parse($contract->joining_date)->diffInDays(now()) + 1 ) + $contract->employee->transactions->where('transactions', 'over_time')->sum('price') - $contract->employee->transactions->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->where('transactions', 'deduction')->sum('price') - $contract->gosi_dedc}}
-                        </td>
-                    </tr>
-                @endforeach
+                        @if($contract->joining_date >=  '20'.$yer.'-'.$mnth.'-01' &&  $contract->joining_date <= '20'.$yer.'-'.$mnth.'-31' )
+                        @if( $mnth == now()->format('m') && $yer == now()->format('y'))
+                            {{($contract->total_salary / 30) * ( now()->format('d') - Carbon\Carbon::parse($contract->joining_date)->format('d') + 1 ) + $contract->employee->transactions->where('transactions', 'over_time')->sum('price') - $contract->employee->transactions->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->where('transactions', 'deduction')->sum('price') }}
+                            @else
+                            {{($contract->total_salary / 30) * ( 31 - Carbon\Carbon::parse($contract->joining_date)->format('d') ) + $contract->employee->transactions->where('transactions', 'over_time')->sum('price') - $contract->employee->transactions->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->where('transactions', 'deduction')->sum('price') }}
+                            @endif
+                        @else
+                        @if($mnth == now()->format('m') && $yer == now()->format('y'))
+                            {{($contract->total_salary / 30) * now()->format('d') + $contract->employee->transactions->where('transactions', 'over_time')->sum('price') - $contract->employee->transactions->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->where('transactions', 'deduction')->sum('price') }}
 
+                        @else
+                            {{$contract->total_salary   + $contract->employee->transactions->where('transactions', 'over_time')->sum('price') - $contract->employee->transactions->where('created_at','<=','20'.$yer.'-'.$mnth.'-31')->where('created_at','>=','20'.$yer.'-'.$mnth.'-01')->where('transactions', 'deduction')->sum('price') }}
+
+                        @endif
+                        @endif
+                        </td>
+              {{-- - $contract->gosi_dedc --}}
+              </tr>
+                @endforeach
+@endif
             </tbody>
 
         </table>
