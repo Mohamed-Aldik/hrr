@@ -23,22 +23,22 @@ class AddEmployeeComponent extends Component
         $this->validateOnly($fields, [
          
             'job_number' => 'required | unique:employees,job_number,'.$this->job_number, 
-            'name' => 'required | string ',
+            'name' => 'required | alpha ',
             'id_number' => 'required | numeric| digits_between:10,40 | unique:employees,id_number,'.$this->id_number,
             'birthday' => 'required | before:15 years ago',
-            'email' => ' unique:employees,email,'.$this->email,
-            'phone' => 'digits_between:4,20 | unique:employees,phone,'.$this->phone, 
+            'email' => 'somtimes|nullable| unique:employees,email,' .$this->email,
+            'phone' => 'somtimes|nullable| digits_between:4,20 | unique:employees,phone,' . $this->phone,
         ]);
     }
 
     public function addEmployee() {
         $this->validate([
             'job_number' => 'required | unique:employees,job_number,'.$this->job_number, 
-            'name' => 'required | string ',
+            'name' => 'required | alpha ',
             'id_number' => 'required | numeric| digits_between:10,40 | unique:employees,id_number,'.$this->id_number,
             'birthday' => 'required | before:15 years ago',
-            'email' => ' unique:employees,email,'.$this->email,
-            'phone' => 'digits_between:4,20 | unique:employees,phone,'.$this->phone, 
+            'email' => 'somtimes|nullable| unique:employees,email,' .$this->email,
+            'phone' => 'somtimes|nullable| digits_between:4,20 | unique:employees,phone,' . $this->phone,
 
 
         ]);
